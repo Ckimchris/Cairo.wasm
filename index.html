@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebAssembly workflow</title>
+    <script src="./dist/app.min.js"></script>
+    <script src="./dist/appWASM.js"></script>
+    <script>
+    "use strict"
+    window.addEventListener("load", () => {
+
+        console.log("js : Util.addTwo(2,2)", Util.addTwo(2,2))
+    })
+
+    window.addEventListener("wasmLoaded", () => {
+        console.log("wasm loaded")
+
+        console.log("WASM : addTwo(2, 2) = ", Module.ccall("addTwo", ["number"], ["number", "number"], [2, 2]))
+        const main = new Main(Module)
+    })
+    </script>
+</head>
+<body>
+open the console
+</body>
+</html>
